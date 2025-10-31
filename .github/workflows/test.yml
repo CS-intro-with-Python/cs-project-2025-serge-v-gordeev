@@ -6,11 +6,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Get Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
       - name: Build image
         run: docker build -t server:latest .
       - name: Create container
         run: docker run -p 8080:80 -d server:latest
-      - name: Sleep
-        run: sleep(3)
       - name: Test
         run: python3 client.py
