@@ -14,5 +14,7 @@ jobs:
         run: docker build -t server:latest .
       - name: Create container
         run: docker run -p 8080:80 -d server:latest
+      - name: Dependencies
+        run: pip install -r requirements.txt
       - name: Test
         run: python3 client.py
