@@ -1,0 +1,14 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t server:latest .
+      - name: Create container
+        run: docker run -p 8080:80 -d server:latest
+      - name: Test
+        run: python3 client.py
