@@ -6,4 +6,6 @@ COPY . /app
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT python3 main.py
+ENV FLASK_RUN_RELOAD=true
+
+CMD ["flask", "--app", "app/server.py", "run", "-h", "0.0.0.0", "-p", "8080"]
