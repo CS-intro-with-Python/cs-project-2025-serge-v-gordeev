@@ -3,36 +3,54 @@
 
 ## Description
 
-Describe the project in 2-3 sentences (You can use more). 
+Context: Kerbal Space Program is a spaceflight simulator game about launching sentient (?) froglike
+creatures into space, with semi-(semi-(semi-realistic)) physics.
+
+A spacecraft's ability to get somewhere, and the cost of any maneuver, is measured in how much it can 
+change its velocity, referred to as delta-v. For example, a ship may have 1500 m/s of delta-v left; after a
+maneuver where it changes its velocity by 500 m/s, with the remaining fuel it will have 1000 m/s of delta-v left.
+Going from Earth orbit to Lunar orbit, in the real world, takes about 4.3 km/s  of delta-v.
+
+This application will calculate the amount of delta-v needed to travel a route between some planets (or moons)
+in the Kerbolar system.
 
 ## Setup
 
-Describe the steps to set up the environment and run the application. This can be a bash script or docker commands.
-
 ```
-Your commands
+# if you do not have the flask and request libraries:
+pip install -r requirements.txt
+
+# create the image and run the application within the container:
+docker build -t server .
+docker run -p 80:8080 -d server
+
+# test that the server is running within the container:
+python3 client.py
 
 ```
 
 ## Requirements
 
-Describe technologies, libraries, languages you are using (this can be updated in the future).
+* Python 3.11 (or higher?...)
+* Flask library
+* Requests library
+* Docker
 
 ## Features
 
-Describe the main features the application performs.
-
-* Feature 1
-* Feature 2
+* The user can select multiple locations (planets, moons) in the KSP solar system
+* (Maybe the orbital altitudes at each waypoint could be entered too?)
+* The application will calculate the amount of delta-v needed to make the maneuvers
+to traverse this route
+* The application prints the resulting number in a text field
 
 ## Git
 
-Specify which branch will store the latest stable version of the application
+The latest version of the application is stored in the main branch of the repository
 
 ## Success Criteria
 
-Describe the criteria by which the success of the project can be determined
-(this will be updated in the future)
-
-* Criteria 1
-
+* The application does not crash
+* The application can take in and process user input in some form
+* The application can display the info about the correct route (the one the user entered) 
+* The information about maneuver costs that the application outputs should be at least close to being correct
