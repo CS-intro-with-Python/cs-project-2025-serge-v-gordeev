@@ -1,11 +1,10 @@
 from flask import Flask
-from flask import request
 
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
-    return ('Hello, world?')
+def temp():
+    return ('This is a test message, there is nothing here yet')
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)

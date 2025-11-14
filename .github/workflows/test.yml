@@ -13,7 +13,7 @@ jobs:
       - name: Build image
         run: docker build -t server:latest .
       - name: Create container
-        run: docker run -p 8080:8080 -d server:latest
+        run: docker run -p 80:8080 -d server:latest
       - name: Dependencies
         run: pip install -r requirements.txt
       - name: Test
