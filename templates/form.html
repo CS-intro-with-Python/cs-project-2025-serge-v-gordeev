@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    table, th, td {
+        border: 0px;
+    }
+    tr {
+        height: 60px;
+    }
+    th, td {
+        padding: 1px;
+    }
+</style>
+    <meta charset="UTF-8">
+    <title>Simple Form</title>
+</head>
+<body>
+
+<script>
+    async function send_request()
+    {
+        from = document.querySelector("#from").value;
+        to = document.querySelector("#to").value;
+        alt_from = document.querySelector("#alt_from").value;
+        alt_to = document.querySelector("#alt_to").value;
+
+        try {
+            const response = await fetch('/test',
+            {
+                method: 'POST',
+                headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json'
+                },
+                body: JSON.stringify([{location: from, alt: alt_from}, {location: to, alt: alt_to}])
+            });
+
+            if (!response.ok)
+            {
+                throw new Error(`Error: ${response.status}`);
+            }
+            else
+            {
+                let result = await response.json();
+                document.getElementById('output').innerHTML = result.Delta_v;
+            }
+
+
+        } catch (err) {
+            console.error("Request failed:", err);
+        }
+    }
+</script>
+
+<table>
+    <tr>
+        <td>
+            <select id="from">
+                <option value="">Select option</option>
+                <option value="Kerbin">Kerbin</option>
+                <option value="Duna">Duna</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" id="alt_from">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select id="to">
+                <option value="">Select option</option>
+                <option value="Duna">Duna</option>
+                <option value="Kerbin">Kerbin</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" id="alt_to">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="send_request()">Calculate</button>
+        </td>
+        <td>
+            <p id="output">  </p>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

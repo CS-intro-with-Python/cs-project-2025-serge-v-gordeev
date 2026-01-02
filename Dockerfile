@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 ENV FLASK_RUN_RELOAD=true
 
-CMD ["flask", "--app", "server.py", "run", "-h", "0.0.0.0", "-p", "28931"]
+CMD ["flask", "--app", "server.py", "run", "-h", "0.0.0.0", "-p", "31764"]

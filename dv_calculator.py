@@ -1,2 +1,2 @@
-def get_dv(body1, body2):
-    return 12345
+def get_response(*args):
+    return {"Delta_v": "12345"}

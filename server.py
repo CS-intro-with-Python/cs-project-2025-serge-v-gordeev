@@ -1,11 +1,17 @@
-# comment to restart action
-from flask import Flask
+from flask import Flask, jsonify, request, render_template
+import dv_calculator
 
 app = Flask(__name__)
 
 @app.route('/')
 def temp():
-    return ('This is a test message, there is nothing here yet')
+    return render_template("form.html")
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=28931)
+@app.route('/test', methods=["POST"])
+def test():
+    received = request.json
+    to_return = jsonify(dv_calculator.get_response(received))
+    return to_return
+
+# if __name__ == '__main__':
+app.run(host="0.0.0.0", port=31764)
