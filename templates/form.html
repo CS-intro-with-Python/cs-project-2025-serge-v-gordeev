@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-    table, th, td {
-        border: 0px;
-    }
-    tr {
-        height: 60px;
-    }
-    th, td {
-        padding: 1px;
-    }
-</style>
     <meta charset="UTF-8">
-    <title>Simple Form</title>
+    <title>KSP delta-v calculator</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 400px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        select, input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+    <meta charset="UTF-8">
 </head>
 <body>
 
 <script>
-    async function send_request()
+    let n = 2;
+    var array = ["Kerbol", "Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike",
+    "Dres", "Jool", "Laythe", "Tylo", "Vall", "Pol", "Bop", "Eeloo"];
+    async function sendRequest()
     {
-        from = document.querySelector("#from").value;
-        to = document.querySelector("#to").value;
-        alt_from = document.querySelector("#alt_from").value;
-        alt_to = document.querySelector("#alt_to").value;
+        let points = [];
+
+        for (var i = 1; i < (n+1); i++) {
+            const select_name = "select" + i;
+            const text_name = "text" + i;
+            const planet_name = document.getElementById(select_name).value;
+            const altitude = document.getElementById(text_name).value;
+            points.push({ location: planet_name, alt: altitude })
+        }
 
         try {
             const response = await fetch('/test',
@@ -33,7 +45,7 @@
                    'Accept': 'application/json',
                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify([{location: from, alt: alt_from}, {location: to, alt: alt_to}])
+                body: JSON.stringify(points)
             });
 
             if (!response.ok)
@@ -43,7 +55,7 @@
             else
             {
                 let result = await response.json();
-                document.getElementById('output').innerHTML = result.Delta_v;
+                document.getElementById('output').innerHTML = result.dv;
             }
 
 
@@ -51,42 +63,110 @@
             console.error("Request failed:", err);
         }
     }
+
+    function appendPoint() {
+        n++;
+        const cell1 = document.createElement("td");
+        const cell2 = document.createElement("td");
+        const row = document.createElement("tr");
+
+        const sel = document.createElement("select");
+        sel.id = "select" + n;
+        sel.name = "select" + n;
+
+        for (var i = 0; i < array.length; i++) {
+            var option = document.createElement("option");
+            option.value = array[i];
+            option.text = array[i];
+            sel.appendChild(option);
+        }
+        const inp = document.createElement("input");
+        inp.id = "text" + n;
+        inp.name = "text" + n;
+
+
+        cell1.appendChild(sel);
+        cell2.appendChild(inp);
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+
+        document.getElementById("tbl").appendChild(row);
+    }
+
+    function removePoint() {
+        if (n > 2) {
+            n--;
+            const lastChild = document.getElementById("tbl").lastElementChild;
+            lastChild.remove();
+        }
+    }
 </script>
 
-<table>
+<table id="tbl">
     <tr>
         <td>
-            <select id="from">
-                <option value="">Select option</option>
-                <option value="Kerbin">Kerbin</option>
-                <option value="Duna">Duna</option>
-            </select>
-        </td>
-        <td>
-            <input type="text" id="alt_from">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <select id="to">
-                <option value="">Select option</option>
-                <option value="Duna">Duna</option>
-                <option value="Kerbin">Kerbin</option>
-            </select>
-        </td>
-        <td>
-            <input type="text" id="alt_to">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <button onclick="send_request()">Calculate</button>
+            <button onclick="sendRequest()">Calculate</button>
         </td>
         <td>
             <p id="output">  </p>
         </td>
     </tr>
+    <tr>
+        <td>
+            <select name="select1" id="select1">
+                <option value="Kerbol">Kerbol</option>
+                <option value="Moho">Moho</option>
+                <option value="Eve">Eve</option>
+                <option value="Gilly">Gilly</option>
+                <option value="Kerbin">Kerbin</option>
+                <option value="Mun">Mun</option>
+                <option value="Minmus">Minmus</option>
+                <option value="Duna">Duna</option>
+                <option value="Ike">Ike</option>
+                <option value="Dres">Dres</option>
+                <option value="Jool">Jool</option>
+                <option value="Laythe">Laythe</option>
+                <option value="Vall">Vall</option>
+                <option value="Tylo">Tylo</option>
+                <option value="Pol">Bop</option>
+                <option value="Bop">Pol</option>
+                <option value="Eeloo">Eeloo</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" name="text1" id="text1">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <select name="select2" id="select2">
+                <option value="Kerbol">Kerbol</option>
+                <option value="Moho">Moho</option>
+                <option value="Eve">Eve</option>
+                <option value="Gilly">Gilly</option>
+                <option value="Kerbin">Kerbin</option>
+                <option value="Mun">Mun</option>
+                <option value="Minmus">Minmus</option>
+                <option value="Duna">Duna</option>
+                <option value="Ike">Ike</option>
+                <option value="Dres">Dres</option>
+                <option value="Jool">Jool</option>
+                <option value="Laythe">Laythe</option>
+                <option value="Vall">Vall</option>
+                <option value="Tylo">Tylo</option>
+                <option value="Pol">Bop</option>
+                <option value="Bop">Pol</option>
+                <option value="Eeloo">Eeloo</option>
+            </select>
+        </td>
+        <td>
+            <input type="text" name="text2" id="text2">
+        </td>
+    </tr>
 </table>
+
+<button onclick="appendPoint()">Append</button>
+<button onclick="removePoint()">Remove</button>
 
 </body>
 </html>
