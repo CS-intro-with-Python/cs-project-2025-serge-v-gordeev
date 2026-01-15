@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request, render_template
 #from dv_calculator import get_response, hardcode_planets
 from database import db
 import logging
-#
 
 #logging.basicConfig(
 #    level=logging.INFO,
@@ -10,7 +9,7 @@ import logging
 #)
 
 app = Flask(__name__)
-app.name = "Semester 1 project"
+#app.name = "Semester 1 project"
 
 #werkzeug_logger = logging.getLogger("werkzeug")
 #werkzeug_logger.setLevel(logging.WARNING)
@@ -35,13 +34,13 @@ def temp():
     return "abcd"
     #return render_template("form.html")
 
-@app.route('/test', methods=["POST"])
-def test():
-    received = request.json
-    print(received)
-    to_return = "abcd"
-    #to_return = jsonify(get_response(received))
-    return to_return
+#@app.route('/test', methods=["POST"])
+#def test():
+#    received = request.json
+#    print(received)
+#    to_return = "abcd"
+#    #to_return = jsonify(get_response(received))
+#    return to_return
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=31764)
