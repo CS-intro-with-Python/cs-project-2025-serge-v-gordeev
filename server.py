@@ -34,13 +34,13 @@ def temp():
     return "abcd"
     #return render_template("form.html")
 
-@app.route('/test', methods=["POST"])
-def test():
-    received = request.json
-    print(received)
-    to_return = "abcd"
-    #to_return = jsonify(get_response(received))
-    return to_return
+#@app.route('/test', methods=["POST"])
+#def test():
+#    received = request.json
+#    print(received)
+#    to_return = "abcd"
+#    #to_return = jsonify(get_response(received))
+#    return to_return
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=31764)
