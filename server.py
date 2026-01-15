@@ -3,20 +3,20 @@ from flask import Flask, jsonify, request, render_template
 from database import db
 import logging
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(name)s: %(message)s"
-)
+#logging.basicConfig(
+#    level=logging.INFO,
+#    format="%(asctime)s %(levelname)s %(name)s: %(message)s"
+#)
 
 app = Flask(__name__)
 app.name = "Semester 1 project"
 
-werkzeug_logger = logging.getLogger("werkzeug")
-werkzeug_logger.setLevel(logging.WARNING)
-handler = logging.StreamHandler()
-formatter = logging.Formatter("%(asctime)s%(levelname)s %(name)s: %(message)s")
-werkzeug_logger.addHandler(handler)
-handler.setFormatter(formatter)
+#werkzeug_logger = logging.getLogger("werkzeug")
+#werkzeug_logger.setLevel(logging.WARNING)
+#handler = logging.StreamHandler()
+#formatter = logging.Formatter("%(asctime)s%(levelname)s %(name)s: %(message)s")
+#werkzeug_logger.addHandler(handler)
+#handler.setFormatter(formatter)
 
 #app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///ksp_celestial_body_data" # "postgresql://postgres:your_password@localhost:5432/ksp_celestial_body_data"
 #app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -25,9 +25,9 @@ handler.setFormatter(formatter)
 #    db.create_all()
 #    hardcode_planets()
 
-@app.before_request
-def log():
-    app.logger.info("Incoming %s request from %s on path %s", request.method, request.remote_addr, request.path)
+#@app.before_request
+#def log():
+#    app.logger.info("Incoming %s request from %s on path %s", request.method, request.remote_addr, request.path)
 
 @app.route('/')
 def temp():
