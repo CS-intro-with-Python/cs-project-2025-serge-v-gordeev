@@ -33,7 +33,7 @@ def log():
 def temp():
     return render_template("form.html")
 
-@app.route('/test', methods=["POST"])
+@app.route('/calculate', methods=["POST"])
 def test():
     received = request.json
     to_return = jsonify(get_response(received))

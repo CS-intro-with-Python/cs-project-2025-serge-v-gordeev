@@ -93,10 +93,10 @@ def hardcode_planets():
 
 def wrong_input(request_data):
     for point in request_data:
-        if not ("location" in point.keys() and "alt" in point.keys()):
+        if not ("location" in point.keys() and "altitude" in point.keys() and "capture" in point.keys()):
             return True
         try:
-            if int(point["alt"]) <= 0:
+            if int(point["altitude"]) <= 0:
                 return True
         except (ValueError, TypeError):
             return True
@@ -112,7 +112,7 @@ def get_response(request_data):
         dest = get_planet(stop["location"])
         if source is None or dest is None:
             return {"dv": "Error: invalid input"}
-        dv += calculate_dv(source, int(prev["alt"]), dest, int(stop["alt"]), stop["capture"])
+        dv += calculate_dv(source, int(prev["altitude"]), dest, int(stop["altitude"]), stop["capture"])
         prev = stop
     dv = round(dv, 1)
     return {"dv": dv}

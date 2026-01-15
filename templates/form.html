@@ -27,6 +27,7 @@
     let n = 1;
     var array = ["Kerbol", "Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike",
     "Dres", "Jool", "Laythe", "Tylo", "Vall", "Pol", "Bop", "Eeloo"];
+
     async function sendRequest()
     {
         let points = [];
@@ -42,11 +43,11 @@
                 capture_burn = document.getElementById(check_name).checked;
             }
 
-            points.push({ location: planet_name, alt: altitude, capture: capture_burn })
+            points.push({ location: planet_name, altitude: altitude, capture: capture_burn })
         }
 
         try {
-            const response = await fetch('/test',
+            const response = await fetch('/calculate',
             {
                 method: 'POST',
                 headers: {
