@@ -17,15 +17,15 @@ in the Kerbolar system.
 ## Setup
 
 ```
-# if you do not have the flask and request libraries:
+# if you do not have the packages installed:
 pip install -r requirements.txt
 
 # create the image and run the application within the container:
-docker build -t server .
-docker run -p 80:8080 -d server
+docker build -t server:latest .
+docker run -p 28931:31764 -d server:latest
 
 # test that the server is running within the container:
-python3 client.py
+python3 test_client.py
 
 ```
 
@@ -34,6 +34,8 @@ python3 client.py
 * Python 3.11 (or higher?...)
 * Flask library
 * Requests library
+* SQLalchemy library
+* Flask-SQLalchemy library
 * Docker
 
 ## Features
