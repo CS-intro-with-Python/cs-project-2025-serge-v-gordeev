@@ -31,7 +31,8 @@ def log():
 
 @app.route('/')
 def temp():
-    return render_template("form.html")
+    return "abcd"
+    #return render_template("form.html")
 
 @app.route('/test', methods=["POST"])
 def test():
