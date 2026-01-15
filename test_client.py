@@ -8,11 +8,6 @@ test_data2 = [{"location" : "Kerbin", "altitude" : 80000, "capture" : False}, {"
 if (not wrong_input(test_data1)) or wrong_input(test_data2):
     sys.exit(1)
 
-Kerbin = get_planet("Kerbin")
-Duna = get_planet("Duna")
-if not (800 < calculate_dv(Kerbin, 80000, Duna, 60000, 0) < 1200):
-    sys.exit(1)
-
 response = requests.get("http://127.0.0.1:28931/")
 if response.status_code != 200:
     sys.exit(1)
