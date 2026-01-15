@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, render_template
 #from dv_calculator import get_response, hardcode_planets
 from database import db
 import logging
+#
 
 #logging.basicConfig(
 #    level=logging.INFO,
