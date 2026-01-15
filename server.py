@@ -18,7 +18,7 @@ formatter = logging.Formatter("%(asctime)s%(levelname)s %(name)s: %(message)s")
 werkzeug_logger.addHandler(handler)
 handler.setFormatter(formatter)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:your_password@localhost:5432/ksp_celestial_body_data"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///ksp_celestial_body_data" #"postgresql://postgres:your_password@localhost:5432/ksp_celestial_body_data"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 with app.app_context():
@@ -36,6 +36,7 @@ def temp():
 @app.route('/test', methods=["POST"])
 def test():
     received = request.json
+    print(received)
     to_return = jsonify(get_response(received))
     return to_return
 

@@ -112,7 +112,7 @@ def get_response(request_data):
         dest = get_planet(stop["location"])
         if source is None or dest is None:
             return {"dv": "Error: invalid input"}
-        dv += calculate_dv(source, int(prev["alt"]), dest, int(stop["alt"]), 1)
+        dv += calculate_dv(source, int(prev["alt"]), dest, int(stop["alt"]), stop["capture"])
         prev = stop
     dv = round(dv, 1)
     return {"dv": dv}

@@ -6,14 +6,16 @@
     <style>
         table {
             border-collapse: collapse;
-            width: 400px;
+            width: 600px;
+            border: 1px solid #ccc;
         }
         th, td {
             border: 1px solid #ccc;
             padding: 8px;
+            width: 200px;
         }
-        select, input {
-            width: 100%;
+        select, input[type="text"] {
+            width: 150px;
             box-sizing: border-box;
         }
     </style>
@@ -22,7 +24,7 @@
 <body>
 
 <script>
-    let n = 2;
+    let n = 1;
     var array = ["Kerbol", "Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike",
     "Dres", "Jool", "Laythe", "Tylo", "Vall", "Pol", "Bop", "Eeloo"];
     async function sendRequest()
@@ -32,9 +34,15 @@
         for (var i = 1; i < (n+1); i++) {
             const select_name = "select" + i;
             const text_name = "text" + i;
+            const check_name = "check" + i;
             const planet_name = document.getElementById(select_name).value;
             const altitude = document.getElementById(text_name).value;
-            points.push({ location: planet_name, alt: altitude })
+            let capture_burn = false;
+            if (i != 1) {
+                capture_burn = document.getElementById(check_name).checked;
+            }
+
+            points.push({ location: planet_name, alt: altitude, capture: capture_burn })
         }
 
         try {
@@ -68,11 +76,11 @@
         n++;
         const cell1 = document.createElement("td");
         const cell2 = document.createElement("td");
+        const cell3 = document.createElement("td");
         const row = document.createElement("tr");
 
         const sel = document.createElement("select");
         sel.id = "select" + n;
-        sel.name = "select" + n;
 
         for (var i = 0; i < array.length; i++) {
             var option = document.createElement("option");
@@ -81,20 +89,25 @@
             sel.appendChild(option);
         }
         const inp = document.createElement("input");
+        inp.type = "text";
         inp.id = "text" + n;
-        inp.name = "text" + n;
 
+        const check = document.createElement("input");
+        check.type = "checkbox";
+        check.id = "check" + n;
 
         cell1.appendChild(sel);
         cell2.appendChild(inp);
+        cell3.appendChild(check);
         row.appendChild(cell1);
         row.appendChild(cell2);
+        row.appendChild(cell3);
 
         document.getElementById("tbl").appendChild(row);
     }
 
     function removePoint() {
-        if (n > 2) {
+        if (n > 1) {
             n--;
             const lastChild = document.getElementById("tbl").lastElementChild;
             lastChild.remove();
@@ -112,34 +125,13 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <select name="select1" id="select1">
-                <option value="Kerbol">Kerbol</option>
-                <option value="Moho">Moho</option>
-                <option value="Eve">Eve</option>
-                <option value="Gilly">Gilly</option>
-                <option value="Kerbin">Kerbin</option>
-                <option value="Mun">Mun</option>
-                <option value="Minmus">Minmus</option>
-                <option value="Duna">Duna</option>
-                <option value="Ike">Ike</option>
-                <option value="Dres">Dres</option>
-                <option value="Jool">Jool</option>
-                <option value="Laythe">Laythe</option>
-                <option value="Vall">Vall</option>
-                <option value="Tylo">Tylo</option>
-                <option value="Pol">Bop</option>
-                <option value="Bop">Pol</option>
-                <option value="Eeloo">Eeloo</option>
-            </select>
-        </td>
-        <td>
-            <input type="text" name="text1" id="text1">
-        </td>
+        <th> Planet </th>
+        <th> Orbital altitude </th>
+        <th> Include capture burn </th>
     </tr>
     <tr>
         <td>
-            <select name="select2" id="select2">
+            <select id="select1">
                 <option value="Kerbol">Kerbol</option>
                 <option value="Moho">Moho</option>
                 <option value="Eve">Eve</option>
@@ -160,12 +152,15 @@
             </select>
         </td>
         <td>
-            <input type="text" name="text2" id="text2">
+            <input type="text" id="text1">
+        </td>
+        <td>
+
         </td>
     </tr>
 </table>
 
-<button onclick="appendPoint()">Append</button>
+<button onclick="appendPoint()">Add</button>
 <button onclick="removePoint()">Remove</button>
 
 </body>
