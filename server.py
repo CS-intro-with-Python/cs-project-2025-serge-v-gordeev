@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, render_template
-from dv_calculator import get_response, hardcode_planets
+#from dv_calculator import get_response, hardcode_planets
 from database import db
 import logging
 
@@ -18,12 +18,12 @@ formatter = logging.Formatter("%(asctime)s%(levelname)s %(name)s: %(message)s")
 werkzeug_logger.addHandler(handler)
 handler.setFormatter(formatter)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///ksp_celestial_body_data" # "postgresql://postgres:your_password@localhost:5432/ksp_celestial_body_data"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db.init_app(app)
-with app.app_context():
-    db.create_all()
-    hardcode_planets()
+#app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///ksp_celestial_body_data" # "postgresql://postgres:your_password@localhost:5432/ksp_celestial_body_data"
+#app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+#db.init_app(app)
+#with app.app_context():
+#    db.create_all()
+#    hardcode_planets()
 
 @app.before_request
 def log():
@@ -37,7 +37,8 @@ def temp():
 def test():
     received = request.json
     print(received)
-    to_return = jsonify(get_response(received))
+    to_return = "abcd"
+    #to_return = jsonify(get_response(received))
     return to_return
 
 if __name__ == '__main__':
